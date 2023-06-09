@@ -10,7 +10,7 @@ function Bot({}: Props) {
         <Image
           src="/openai-2.svg"
           /*  src="https://links.papareact.com/c2cdd5" */
-          alt="Trello logo"
+          alt="openAI logo"
           width={120}
           height={40}
           className="w-10 h-10 text-blue inline mx-2 "

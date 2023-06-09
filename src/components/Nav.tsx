@@ -9,7 +9,7 @@ type Props = {};
 
 function Nav() {
   return (
-    <header className="flex flex-col md:flex-row items-center p-5 bg-gray-300/60 md:justify-between ">
+    <header className="flex flex-col md:flex-row items-center p-5 bg-gray-200/80 md:justify-between ">
       <Image
         src="/trello-logo-worldvectorlogo.svg"
         /*  src="https://links.papareact.com/c2cdd5" */

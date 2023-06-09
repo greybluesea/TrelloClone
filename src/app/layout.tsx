@@ -17,6 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className + " bg-gray-200"}>
+        <div className="absolute top-0 left-0 w-full h-full bg-[url('/backgroundImg.jpg')] blur-md opacity-70 -z-50 bg-cover filter"></div>
         <Nav />
         {children}
       </body>
