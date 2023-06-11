@@ -4,13 +4,13 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 type Props = {};
 
 function Board({}: Props) {
-  return (
-    <DragDropContext>
+  return {
+    /* <DragDropContext>
       <Droppable droppableId="board" direction="horizontal" type="column">
         {(provided) => <div></div>}
       </Droppable>
-    </DragDropContext>
-  );
+    </DragDropContext> */
+  };
 }
 
 export default Board;
