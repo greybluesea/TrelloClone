@@ -11,7 +11,7 @@ function Board({}: Props) {
 
   useEffect(() => {
     getBoard();
-  }, [getBoard]);
+  }, []);
 
   return (
     <h1>Hello</h1>

@@ -1,15 +1,15 @@
 interface Board {
-  columns: Map<Status, Column>;
+  lists: Map<Status, List>;
 }
 
 type Status = "todo" | "doing" | "done";
 
-interface Column {
-  id: Status;
-  todos: Todo[];
+interface List {
+  status: Status;
+  tasks: Task[];
 }
 
-interface Todo {
+interface Task extends Models.Document {
   $id: string;
   $createdAt: string;
   title: string;

@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
-import getTodosGroupedByStatus from "./lib/getTodosGroupedByStatus";
+import fetchBoard from "./lib/fetchBoard";
 
 interface BoardState {
   board: Board;
@@ -21,10 +21,10 @@ const useBoardStore = create<BoardState>()(
     persist(
       (set) => ({
         board: {
-          columns: new Map<Status, Column>(),
+          lists: new Map<Status, List>(),
         },
         getBoard: async () => {
-          const board = await getTodosGroupedByStatus();
+          const board = await fetchBoard();
           set({ board });
         },
       }),
