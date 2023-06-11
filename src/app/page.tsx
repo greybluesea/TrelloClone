@@ -5,7 +5,9 @@ export default function Home() {
   return (
     <>
       <Bot />
-      <main>{/* <Board /> */}</main>
+      <main>
+        <Board />
+      </main>
     </>
   );
 }
