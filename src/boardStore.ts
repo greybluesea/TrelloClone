@@ -17,22 +17,22 @@ const useBoardStore = create<BoardState>()(
       set({ board });
     },
   }) */
-  devtools(
-    persist(
-      (set) => ({
-        board: {
-          lists: new Map<Status, List>(),
-        },
-        getBoard: async () => {
-          const board = await fetchBoard();
-          set({ board });
-        },
-      }),
-      {
+  /*  devtools(
+    persist( */
+  (set) => ({
+    board: {
+      lists: new Map<Status, List>(),
+    },
+    getBoard: async () => {
+      const board = await fetchBoard();
+      set({ board });
+    },
+  })
+  /* {
         name: "board-storage",
       }
-    )
-  )
+     )
+  ) */
 );
 
 export default useBoardStore;
