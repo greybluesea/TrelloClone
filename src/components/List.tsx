@@ -1,6 +1,6 @@
 import React from "react";
 
-type Props = {};
+interface Props extends List {}
 
 const List = (props: Props) => {
   return <div>List</div>;
