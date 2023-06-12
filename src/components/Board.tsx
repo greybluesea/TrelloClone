@@ -20,7 +20,7 @@ function Board({}: Props) {
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
-      <Droppable droppableId="board" direction="horizontal" /* type="lists" */>
+      <Droppable droppableId="board" direction="horizontal" type="lists">
         {(provided) => (
           <div
             className="grid grid-cols-1 max-w-sm md:grid-cols-2 md:max-w-3xl lg:grid-cols-3 gap-5 lg:max-w-7xl mx-auto px-3 text-center"

@@ -37,12 +37,19 @@ const List = ({ list, index }: Props) => {
                 </button>
               </div>
             </div>
-            <Droppable droppableId={list.status} direction="vertical">
+            <Droppable
+              droppableId={list.status}
+              direction="vertical"
+              type="cards"
+            >
               {(provided, snapshot) => (
                 <div
                   {...provided.droppableProps}
                   ref={provided.innerRef}
-                  className="p-3"
+                  className={
+                    "p-3 rounded-md " +
+                    (snapshot.isDraggingOver && "bg-green-100/90")
+                  }
                 >
                   {list.tasks.map((task, index) => (
                     <Draggable
@@ -56,8 +63,7 @@ const List = ({ list, index }: Props) => {
                           {...provided.dragHandleProps}
                           ref={provided.innerRef}
                           className={
-                            " bg-gray-100/90 rounded-lg shadow-sm mb-2 py-1 " +
-                            (snapshot.isDraggingOver && "bg-green-100/90")
+                            " bg-gray-100/90 rounded-lg shadow-sm mb-2 py-1 "
                           }
                         >
                           {task.title}
