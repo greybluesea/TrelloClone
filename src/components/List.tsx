@@ -22,7 +22,7 @@ const List = ({ list, index }: Props) => {
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          <div className=" bg-gray-200/90 rounded-lg p-4 ">
+          <div className=" bg-gray-200/90 rounded-lg p-4  ">
             <div className="flex justify-between px-3 ">
               <div className="w-9"></div>
               <h2 className="font-bold text-lg text-gray-800 pt-1 ">
