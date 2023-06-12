@@ -4,6 +4,7 @@ import useBoardStore from "@/boardStore";
 import { list } from "postcss";
 import React, { useEffect } from "react";
 import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
+import List from "./List";
 
 type Props = {};
 
@@ -26,8 +27,8 @@ function Board({}: Props) {
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            {Array.from(board.lists.entries()).map(([status, list]) => (
-              <div key={status}>{list.status}</div>
+            {Array.from(board.lists.entries()).map(([status, list], index) => (
+              <List key={status} list={list} index={index}></List>
             ))}
           </div>
         )}

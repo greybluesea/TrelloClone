@@ -41,8 +41,6 @@ const fetchBoard = async () => {
     )
   );
 
-  console.log(sortedLists);
-
   const board: Board = {
     lists: sortedLists,
   };
