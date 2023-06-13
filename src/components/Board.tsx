@@ -74,6 +74,18 @@ function Board() {
 
         setBoard({ lists: newLists });
       } else {
+        destinationList.tasks.splice(destination.index, 0, sourceTask);
+        const newLists = new Map(board.lists);
+        newLists.set(sourceList.status, {
+          status: sourceList.status,
+          tasks: sourceTasks,
+        });
+        newLists.set(destinationList.status, {
+          status: destinationList.status,
+          tasks: destinationList.tasks,
+        });
+
+        setBoard({ lists: newLists });
       }
     }
     return;
