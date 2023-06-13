@@ -3,12 +3,15 @@
 import useBoardStore from "@/boardStore";
 import { list } from "postcss";
 import React, { useEffect } from "react";
-import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
+import {
+  DragDropContext,
+  Draggable,
+  DropResult,
+  Droppable,
+} from "react-beautiful-dnd";
 import List from "./List";
 
-type Props = {};
-
-function Board({}: Props) {
+function Board() {
   const getBoard = useBoardStore((state) => state.getBoard);
   const board = useBoardStore((state) => state.board);
 
@@ -16,11 +19,19 @@ function Board({}: Props) {
     getBoard();
   }, []);
 
-  const handleDragEnd = (result: DropResult) => {};
+  const handleDragEnd = (result: DropResult) => {
+    const { destination, source, type } = result;
+
+    if (!destination) return;
+
+    if (type === "list") {
+      const entriesArray = Array.from(board.lists.entries());
+    }
+  };
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
-      <Droppable droppableId="board" direction="horizontal" type="lists">
+      <Droppable droppableId="board" direction="horizontal" type="list">
         {(provided) => (
           <div
             className="grid grid-cols-1 max-w-sm md:grid-cols-2 md:max-w-3xl lg:grid-cols-3 gap-5 lg:max-w-7xl mx-auto px-3 text-center"
@@ -28,8 +39,19 @@ function Board({}: Props) {
             ref={provided.innerRef}
           >
             {Array.from(board.lists.entries()).map(([status, list], index) => (
-              <List key={status} list={list} index={index}></List>
+              <Draggable key={status} draggableId={list.status} index={index}>
+                {(provided) => (
+                  <div
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                    ref={provided.innerRef}
+                  >
+                    <List key={status} list={list}></List>
+                  </div>
+                )}
+              </Draggable>
             ))}
+            {provided.placeholder}
           </div>
         )}
       </Droppable>
