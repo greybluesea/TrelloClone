@@ -1,14 +1,12 @@
 import { create } from "zustand";
-import { devtools, persist } from "zustand/middleware";
 import fetchBoard from "./lib/fetchBoard";
-import { databases } from "../appwrite";
 import updateTask from "./lib/updateTask";
 
 interface BoardState {
   board: Board;
   getBoard: () => void;
   setBoard: (board: Board) => void;
-  setTask: (task: Task, newStatus: Status) => void;
+  setTask: (task: Task) => void;
 }
 
 const useBoardStore = create<BoardState>()(
@@ -32,8 +30,8 @@ const useBoardStore = create<BoardState>()(
       set({ board });
     },
     setBoard: (board) => set({ board }),
-    setTask: async (task, newStatus) => {
-      await updateTask(task, newStatus);
+    setTask: async (task) => {
+      await updateTask(task);
     },
   })
   /*  {

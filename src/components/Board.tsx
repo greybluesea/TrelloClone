@@ -80,7 +80,10 @@ function Board() {
           status: destinationList.status,
           tasks: destinationList.tasks,
         });
-        setTask(sourceTask, destinationList.status);
+        setTask({
+          ...sourceTask,
+          status: destinationList.status,
+        });
         setBoard({ lists: newLists });
       }
     }
