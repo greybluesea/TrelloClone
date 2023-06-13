@@ -7,6 +7,8 @@ interface BoardState {
   getBoard: () => void;
   setBoard: (board: Board) => void;
   setTask: (task: Task) => void;
+  searchText: string;
+  setSearchText: (searchText: string) => void;
 }
 
 const useBoardStore = create<BoardState>()(
@@ -33,6 +35,8 @@ const useBoardStore = create<BoardState>()(
     setTask: async (task) => {
       await updateTask(task);
     },
+    searchText: "",
+    setSearchText: (searchText) => set({ searchText }),
   })
   /*  {
         name: "board-storage",

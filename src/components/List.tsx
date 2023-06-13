@@ -2,6 +2,7 @@ import { PlusCircleIcon } from "@heroicons/react/24/solid";
 import React from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import Card from "./Card";
+import useBoardStore from "@/boardStore";
 
 interface Props {
   list: List;
@@ -14,6 +15,7 @@ const statusToTitleObject: { [key in Status]: string } = {
 };
 
 const List = ({ list }: Props) => {
+  const searchText = useBoardStore((state) => state.searchText);
   return (
     <div className=" bg-gray-200/90 rounded-lg p-4  ">
       <div className="flex justify-between px-5 items-center">
@@ -21,7 +23,13 @@ const List = ({ list }: Props) => {
         <h2 className="font-bold text-lg text-gray-800 pt-1 ">
           {statusToTitleObject[list.status]}
           <span className="text-gray-500 bg-green-200/90 rounded-full ml-2 px-2 text-sm  ">
-            {list.tasks.length}
+            {!searchText
+              ? list.tasks.length
+              : list.tasks.filter((task) =>
+                  task.title
+                    .toLocaleLowerCase()
+                    .includes(searchText.toLocaleLowerCase())
+                ).length}
           </span>
         </h2>
         <div className="pt-1">

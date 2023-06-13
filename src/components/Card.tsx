@@ -1,3 +1,4 @@
+import useBoardStore from "@/boardStore";
 import { XCircleIcon } from "@heroicons/react/24/solid";
 import React from "react";
 
@@ -6,6 +7,13 @@ type Props = {
 };
 
 function Card({ task }: Props) {
+  const searchText = useBoardStore((state) => state.searchText);
+  if (
+    searchText &&
+    !task.title.toLowerCase().includes(searchText.toLocaleLowerCase())
+  )
+    return null;
+
   return (
     <div className="flex justify-between items-center mx-2 ml-3">
       <span>{task.title}</span>
