@@ -1,8 +1,7 @@
 "use client";
 
 import useBoardStore from "@/boardStore";
-import { list } from "postcss";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import {
   DragDropContext,
   Draggable,
@@ -15,6 +14,7 @@ function Board() {
   const getBoard = useBoardStore((state) => state.getBoard);
   const board = useBoardStore((state) => state.board);
   const setBoard = useBoardStore((state) => state.setBoard);
+  const setTask = useBoardStore((state) => state.setTask);
 
   useEffect(() => {
     getBoard();
@@ -22,7 +22,6 @@ function Board() {
 
   const handleDragEnd = (result: DropResult) => {
     const { destination, source, type } = result;
-    console.log(result);
 
     if (!destination || !source) return;
     if (
@@ -39,26 +38,23 @@ function Board() {
       setBoard({ lists: rearrangedLists });
     }
 
-    /*  const listsArray = Array.from(board.lists);
-    console.log(Number(source.droppableId)); */
-
     if (type === "card") {
       const listsArray = Array.from(board.lists);
-      const sourceListArray = listsArray.find(
+      const sourceListSubArray = listsArray.find(
         (list) => list[0] === source.droppableId
       );
-      const destinationListArray = listsArray.find(
+      const destinationListSubArray = listsArray.find(
         (list) => list[0] === destination.droppableId
       );
 
       const sourceList: List = {
-        status: sourceListArray![0],
-        tasks: [...sourceListArray![1].tasks],
+        status: sourceListSubArray![0],
+        tasks: [...sourceListSubArray![1].tasks],
       };
 
       const destinationList: List = {
-        status: destinationListArray![0],
-        tasks: [...destinationListArray![1].tasks],
+        status: destinationListSubArray![0],
+        tasks: [...destinationListSubArray![1].tasks],
       };
 
       const sourceTasks = sourceList.tasks;
@@ -84,7 +80,7 @@ function Board() {
           status: destinationList.status,
           tasks: destinationList.tasks,
         });
-
+        setTask(sourceTask, destinationList.status);
         setBoard({ lists: newLists });
       }
     }
