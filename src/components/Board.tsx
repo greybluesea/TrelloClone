@@ -24,7 +24,12 @@ function Board() {
     const { destination, source, type } = result;
     console.log(result);
 
-    if (!destination) return;
+    if (!destination || !source) return;
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    )
+      return;
 
     if (type === "list") {
       const entriesArray = Array.from(board.lists.entries());
@@ -33,6 +38,45 @@ function Board() {
       const rearrangedLists = new Map(entriesArray);
       setBoard({ lists: rearrangedLists });
     }
+
+    /*  const listsArray = Array.from(board.lists);
+    console.log(Number(source.droppableId)); */
+
+    if (type === "card") {
+      const listsArray = Array.from(board.lists);
+      const sourceListArray = listsArray.find(
+        (list) => list[0] === source.droppableId
+      );
+      const destinationListArray = listsArray.find(
+        (list) => list[0] === destination.droppableId
+      );
+
+      const sourceList: List = {
+        status: sourceListArray![0],
+        tasks: [...sourceListArray![1].tasks],
+      };
+
+      const destinationList: List = {
+        status: destinationListArray![0],
+        tasks: [...destinationListArray![1].tasks],
+      };
+
+      const sourceTasks = sourceList.tasks;
+      const [sourceTask] = sourceTasks.splice(source.index, 1);
+
+      if (source.droppableId === destination.droppableId) {
+        sourceTasks.splice(destination.index, 0, sourceTask);
+        const newLists = new Map(board.lists);
+        newLists.set(sourceList.status, {
+          status: sourceList.status,
+          tasks: sourceTasks,
+        });
+
+        setBoard({ lists: newLists });
+      } else {
+      }
+    }
+    return;
   };
 
   return (
