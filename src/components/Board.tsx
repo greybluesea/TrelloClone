@@ -14,6 +14,7 @@ import List from "./List";
 function Board() {
   const getBoard = useBoardStore((state) => state.getBoard);
   const board = useBoardStore((state) => state.board);
+  const setBoard = useBoardStore((state) => state.setBoard);
 
   useEffect(() => {
     getBoard();
@@ -21,11 +22,16 @@ function Board() {
 
   const handleDragEnd = (result: DropResult) => {
     const { destination, source, type } = result;
+    console.log(result);
 
     if (!destination) return;
 
     if (type === "list") {
       const entriesArray = Array.from(board.lists.entries());
+      const [removed] = entriesArray.splice(source.index, 1);
+      entriesArray.splice(destination.index, 0, removed);
+      const rearrangedLists = new Map(entriesArray);
+      setBoard({ lists: rearrangedLists });
     }
   };
 

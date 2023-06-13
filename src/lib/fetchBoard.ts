@@ -7,6 +7,7 @@ const fetchBoard = async () => {
   );
 
   const tasks = data.documents;
+
   const lists = tasks.reduce((acc, task) => {
     if (!acc.get(task.status)) {
       acc.set(task.status, {
