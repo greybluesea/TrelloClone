@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import fetchBoard from "../lib/fetchBoard";
 import updateTask from "../lib/updateTask";
+import { callGetBoard } from "@/lib/callGetBoard";
 
 interface BoardState {
   board: Board;
@@ -28,7 +29,8 @@ const useBoardStore = create<BoardState>()(
       lists: new Map<Status, List>(),
     },
     getBoard: async () => {
-      const board = await fetchBoard();
+      /* const board = await fetchBoard(); */
+      const board = await callGetBoard();
       set({ board });
     },
     setBoard: (board) => set({ board }),

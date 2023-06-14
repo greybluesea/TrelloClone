@@ -18,7 +18,7 @@ function Board() {
 
   useEffect(() => {
     getBoard();
-  }, [getBoard]);
+  }, []);
 
   const handleDragEnd = (result: DropResult) => {
     const { destination, source, type } = result;
