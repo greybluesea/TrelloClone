@@ -1,4 +1,4 @@
-import useBoardStore from "@/boardStore";
+import useBoardStore from "@/store/boardStore";
 import { XCircleIcon } from "@heroicons/react/24/solid";
 import React from "react";
 

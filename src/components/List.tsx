@@ -2,7 +2,7 @@ import { PlusCircleIcon } from "@heroicons/react/24/solid";
 import React from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import Card from "./Card";
-import useBoardStore from "@/boardStore";
+import useBoardStore from "@/store/boardStore";
 
 interface Props {
   list: List;

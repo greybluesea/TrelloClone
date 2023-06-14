@@ -1,6 +1,6 @@
 "use client";
 
-import useBoardStore from "@/boardStore";
+import useBoardStore from "@/store/boardStore";
 import { useEffect } from "react";
 import {
   DragDropContext,
