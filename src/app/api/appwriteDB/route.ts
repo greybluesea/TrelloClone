@@ -1,4 +1,4 @@
-import fetchBoard from "@/lib/fetchBoard";
+import fetchBoard from "@/lib/unused/fetchBoard";
 import { NextResponse } from "next/server";
 import { databases } from "../../../../appwrite";
 

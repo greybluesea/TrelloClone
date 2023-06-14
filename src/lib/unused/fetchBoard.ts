@@ -1,4 +1,4 @@
-import { databases } from "../../appwrite";
+import { databases } from "../../../appwrite";
 
 const fetchBoard = async () => {
   const data = await databases.listDocuments(

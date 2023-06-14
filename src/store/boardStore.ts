@@ -1,7 +1,6 @@
-import { create } from "zustand";
-import fetchBoard from "../lib/fetchBoard";
-import updateTask from "../lib/updateTask";
 import { callGetBoard } from "@/lib/callGetBoard";
+import { create } from "zustand";
+import updateTask from "../lib/updateTask";
 
 interface BoardState {
   board: Board;

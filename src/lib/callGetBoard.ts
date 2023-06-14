@@ -1,6 +1,6 @@
 export async function callGetBoard() {
   const res = await fetch("/api/appwriteDB");
-  console.log(res);
+  /* console.log(res); */
   const tasks: Task[] = await res.json();
 
   const lists = tasks.reduce((acc, task) => {
@@ -41,6 +41,6 @@ export async function callGetBoard() {
     lists: sortedLists,
   };
 
-  console.log(board);
+  /*  console.log(board); */
   return board;
 }
