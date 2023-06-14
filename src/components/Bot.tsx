@@ -42,9 +42,7 @@ function Bot({}: Props) {
           {/*  {summary && !isLoading
             ? summary
             : "GPT is summarizing your tasks for the day..."} */}
-          GPT is currently not in use, because its API is no longer free.
-          Otherwise, it would respond accordingly based on your tasks in all 3
-          lists, upon page loading and every change.
+          GPT is currently not in use, because it's costly.
         </p>
       </div>
     </div>

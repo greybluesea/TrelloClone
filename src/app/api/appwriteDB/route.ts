@@ -11,5 +11,18 @@ export async function GET() {
   const tasks = data.documents;
 
   return NextResponse.json(tasks);
-  /* return new Response("hello"); */
+}
+
+export async function PUT(request: Request) {
+  const task: Task = await request.json();
+  await databases.updateDocument(
+    process.env.TRELLO_CLONE_DATABASE_ID!,
+    process.env.TASKS_COLLECTION_ID!,
+    task.$id,
+    {
+      title: task.title,
+      status: task.status,
+      ...(task.image && { image: task.image }),
+    }
+  );
 }
