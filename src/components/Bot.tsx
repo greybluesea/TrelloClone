@@ -1,9 +1,20 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import useBoardStore from "@/store/boardStore";
 
 type Props = {};
 
 function Bot({}: Props) {
+  const board = useBoardStore((state) => state.board);
+  const [isLoading, setIsLoading] = useState(false);
+  const [summary, setSummary] = useState<string>("");
+
+  useEffect(() => {
+    if (board.lists.size === 0) return;
+    setIsLoading(true);
+  }, []);
+
   return (
     <div className="flex items-center justify-center py-3">
       <div className="shadow-md px-5 py-2 md:py-3 rounded-md bg-gray-200/90 max-w-3xl">

@@ -5,6 +5,7 @@ import { useRef } from "react";
 
 function Search() {
   const setSearchText = useBoardStore((state) => state.setSearchText);
+
   const ref = useRef<HTMLInputElement>(null);
   return (
     <form
