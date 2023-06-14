@@ -2,18 +2,27 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import useBoardStore from "@/store/boardStore";
+import fetchSummary from "@/lib/fetchSummary";
 
 type Props = {};
 
 function Bot({}: Props) {
   const board = useBoardStore((state) => state.board);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [summary, setSummary] = useState<string>("");
 
   useEffect(() => {
     if (board.lists.size === 0) return;
     setIsLoading(true);
-  }, []);
+
+    const BotFetchingSummary = async () => {
+      const summary = await fetchSummary(board);
+      setSummary(summary);
+      setIsLoading(false);
+    };
+
+    BotFetchingSummary();
+  }, [board]);
 
   return (
     <div className="flex items-center justify-center py-3">
@@ -24,10 +33,15 @@ function Bot({}: Props) {
           alt="openAI logo"
           width={120}
           height={40}
-          className="w-10 h-10 text-blue inline mx-2 float-left"
+          className={
+            "w-10 h-10 text-blue inline mx-2 float-left " +
+            (isLoading && "animate-spin")
+          }
         />
         <p className="text-sm font-light min-w-min  ">
-          click or touch to let GPT summarize your tasks for the day...
+          {summary && !isLoading
+            ? summary
+            : "GPT is summarizing your tasks for the day..."}
         </p>
       </div>
     </div>

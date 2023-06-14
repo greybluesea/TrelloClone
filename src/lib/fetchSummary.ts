@@ -32,6 +32,8 @@ const fetchSummary = async (board: Board) => {
     body: JSON.stringify({ tasksObject }),
   });
 
+  console.log(res);
+
   const GPTdata = await res.json();
   const { content } = GPTdata;
 
