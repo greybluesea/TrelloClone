@@ -7,7 +7,7 @@ import fetchSummary from "@/lib/fetchSummary";
 type Props = {};
 
 function Bot({}: Props) {
-  const board = useBoardStore((state) => state.board);
+  /*  const board = useBoardStore((state) => state.board);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [summary, setSummary] = useState<string>("");
 
@@ -22,7 +22,7 @@ function Bot({}: Props) {
     };
 
     BotFetchingSummary();
-  }, [board]);
+  }, [board]); */
 
   return (
     <div className="flex items-center justify-center py-3">
@@ -34,14 +34,17 @@ function Bot({}: Props) {
           width={120}
           height={40}
           className={
-            "w-10 h-10 text-blue inline mx-2 float-left " +
-            (isLoading && "animate-spin")
+            "w-10 h-10 text-blue inline mx-2 float-left "
+            /*  + (isLoading && "animate-spin") */
           }
         />
         <p className="text-sm font-light min-w-min  ">
-          {summary && !isLoading
+          {/*  {summary && !isLoading
             ? summary
-            : "GPT is summarizing your tasks for the day..."}
+            : "GPT is summarizing your tasks for the day..."} */}
+          GPT is currently not in use, because its API is no longer free.
+          Otherwise, it would respond accordingly based on your tasks in all 3
+          lists, upon page loading and every change.
         </p>
       </div>
     </div>
