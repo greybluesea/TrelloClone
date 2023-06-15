@@ -1,6 +1,6 @@
 import { callGetBoard } from "@/lib/callGetBoard";
 import { create } from "zustand";
-import updateTask from "../lib/unused/updateTask";
+import updateTask from "../lib/updateTask";
 import { callPutTask } from "@/lib/callPutTask";
 
 interface BoardState {
@@ -35,8 +35,8 @@ const useBoardStore = create<BoardState>()(
     },
     setBoard: (board) => set({ board }),
     setTask: async (task) => {
-      /* await updateTask(task); */
-      await callPutTask(task);
+      await updateTask(task);
+      /* await callPutTask(task); */
     },
     searchText: "",
     setSearchText: (searchText) => set({ searchText }),

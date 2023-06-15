@@ -1,28 +1,33 @@
 import fetchBoard from "@/lib/unused/fetchBoard";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { databases } from "../../../../appwrite";
 
 export async function GET() {
   const data = await databases.listDocuments(
-    process.env.TRELLO_CLONE_DATABASE_ID!,
-    process.env.TASKS_COLLECTION_ID!
+    process.env.NEXT_PUBLIC_TRELLO_CLONE_DATABASE_ID!,
+    process.env.NEXT_PUBLIC_TASKS_COLLECTION_ID!
   );
 
   const tasks = data.documents;
+  console.log(tasks);
 
   return NextResponse.json(tasks);
 }
 
 export async function PUT(request: Request) {
-  const task: Task = await request.json();
+  const task: Partial<Task> = await request.json();
+  if (!task.$id) return NextResponse.json({ message: "$id is required" });
+
   await databases.updateDocument(
-    process.env.TRELLO_CLONE_DATABASE_ID!,
-    process.env.TASKS_COLLECTION_ID!,
+    process.env.NEXT_PUBLIC_TRELLO_CLONE_DATABASE_ID!,
+    process.env.NEXT_PUBLIC_TASKS_COLLECTION_ID!,
     task.$id,
-    {
+    task
+    /* {
       title: task.title,
       status: task.status,
       ...(task.image && { image: task.image }),
-    }
+    } */
   );
+  /*  return NextResponse.json(task); */
 }
