@@ -1,6 +1,6 @@
 import { databases } from "../../appwrite";
 
-const updateTask = async (task: Task) => {
+const updateTaskInDB = async (task: Task) => {
   await databases.updateDocument(
     process.env.NEXT_PUBLIC_TRELLO_CLONE_DATABASE_ID!,
     process.env.NEXT_PUBLIC_TASKS_COLLECTION_ID!,
@@ -13,4 +13,4 @@ const updateTask = async (task: Task) => {
   );
 };
 
-export default updateTask;
+export default updateTaskInDB;

@@ -4,10 +4,12 @@ import React from "react";
 
 type Props = {
   task: Task;
+  taskIndex: number;
 };
 
-function Card({ task }: Props) {
+function Card({ taskIndex, task }: Props) {
   const searchText = useBoardStore((state) => state.searchText);
+  const deleteTask = useBoardStore((state) => state.deleteTask);
   if (
     searchText &&
     !task.title.toLowerCase().includes(searchText.toLocaleLowerCase())
@@ -17,7 +19,7 @@ function Card({ task }: Props) {
   return (
     <div className="flex justify-between items-center mx-2 ml-3">
       <span>{task.title}</span>
-      <button>
+      <button onClick={() => deleteTask(taskIndex, task)}>
         <XCircleIcon className=" w-8 h-8 text-red-500/70 inline" />
       </button>
     </div>

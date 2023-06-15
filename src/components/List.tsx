@@ -1,8 +1,7 @@
-import { PlusCircleIcon } from "@heroicons/react/24/solid";
-import React from "react";
-import { Draggable, Droppable } from "react-beautiful-dnd";
-import Card from "./Card";
 import useBoardStore from "@/store/boardStore";
+import { Draggable, Droppable } from "react-beautiful-dnd";
+import AddBtn from "./AddBtn";
+import Card from "./Card";
 
 interface Props {
   list: List;
@@ -33,9 +32,7 @@ const List = ({ list }: Props) => {
           </span>
         </h2>
         <div className="pt-1">
-          <button>
-            <PlusCircleIcon className=" w-8 h-8 text-green-600/70 inline " />
-          </button>
+          <AddBtn />
         </div>
       </div>
       <Droppable droppableId={list.status} direction="vertical" type="card">
@@ -58,7 +55,7 @@ const List = ({ list }: Props) => {
                       " bg-gray-100/90 rounded-lg shadow-sm mb-2 py-1 "
                     }
                   >
-                    <Card task={task} />
+                    <Card taskIndex={index} task={task} />
                   </div>
                 )}
               </Draggable>

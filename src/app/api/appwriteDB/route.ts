@@ -9,16 +9,18 @@ export async function GET() {
   );
 
   const tasks = data.documents;
-  console.log(tasks);
+  /* console.log(tasks); */
 
   return NextResponse.json(tasks);
 }
 
 export async function PUT(request: Request) {
   const task: Partial<Task> = await request.json();
-  if (!task.$id) return NextResponse.json({ message: "$id is required" });
 
-  await databases.updateDocument(
+  if (!task || !task.$id)
+    return NextResponse.json({ message: "$id is required" });
+
+  const res = await databases.updateDocument(
     process.env.NEXT_PUBLIC_TRELLO_CLONE_DATABASE_ID!,
     process.env.NEXT_PUBLIC_TASKS_COLLECTION_ID!,
     task.$id,
@@ -30,4 +32,6 @@ export async function PUT(request: Request) {
     } */
   );
   /*  return NextResponse.json(task); */
+
+  console.log(res);
 }
