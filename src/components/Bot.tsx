@@ -42,7 +42,7 @@ function Bot({}: Props) {
           {/*  {summary && !isLoading
             ? summary
             : "GPT is summarizing your tasks for the day..."} */}
-          GPT is currently not in use, because it's costly.
+          GPT is currently not in use, because of cost.
         </p>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { databases } from "../../appwrite";
+import { databases } from "../../../appwrite";
 
 const updateTaskInDB = async (task: Task) => {
   await databases.updateDocument(

@@ -20,18 +20,24 @@ export async function PUT(request: Request) {
   if (!task || !task.$id)
     return NextResponse.json({ message: "$id is required" });
 
-  const res = await databases.updateDocument(
-    process.env.NEXT_PUBLIC_TRELLO_CLONE_DATABASE_ID!,
-    process.env.NEXT_PUBLIC_TASKS_COLLECTION_ID!,
-    task.$id,
-    task
-    /* {
+  try {
+    await databases.updateDocument(
+      process.env.NEXT_PUBLIC_TRELLO_CLONE_DATABASE_ID!,
+      process.env.NEXT_PUBLIC_TASKS_COLLECTION_ID!,
+      task.$id,
+      task
+      /* {
       title: task.title,
       status: task.status,
       ...(task.image && { image: task.image }),
     } */
-  );
+    );
+    return NextResponse.json(
+      { message: "task updated", task },
+      { status: 200 }
+    );
+  } catch (err) {
+    return NextResponse.json({ message: "ERROR" }, { status: 500 });
+  }
   /*  return NextResponse.json(task); */
-
-  console.log(res);
 }

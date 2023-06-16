@@ -8,13 +8,13 @@ export async function callPutTask(task: Task) {
 
   const res = await fetch("/api/appwriteDB", {
     method: "PUT",
-    headers: {
+    /* headers: {
       "Content-Type": "application/json",
-    },
+    }, */
     body: JSON.stringify(simplifiedTask),
   });
 
-  const data = await res.json();
+  /*  const data = await res.json();
 
-  console.log(data);
+  console.log(data); */
 }
