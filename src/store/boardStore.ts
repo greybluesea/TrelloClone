@@ -1,8 +1,7 @@
+import { callDeleteTask } from "@/lib/callDeleteTask";
 import { callGetBoard } from "@/lib/callGetBoard";
-import { create } from "zustand";
-import updateTaskInDB from "../lib/unused/updateTaskInDB";
-import { deleteTaskInDB } from "@/lib/deleteTaskInDB";
 import { callPutTask } from "@/lib/callPutTask";
+import { create } from "zustand";
 
 interface BoardState {
   board: Board;
@@ -33,13 +32,14 @@ const useBoardStore = create<BoardState>()((set, get) => ({
   deleteTask: (taskIndex: number, task: Task) => {
     const newLists = new Map(get().board.lists);
     if (
-      !newLists.get(task?.status) ||
-      newLists.get(task?.status)?.tasks.length === 0
+      !newLists.get(task.status) ||
+      newLists.get(task.status)?.tasks.length === 0
     )
       return console.error("No list found");
-    newLists.get(task?.status)!.tasks.splice(taskIndex, 1);
+    newLists.get(task.status)!.tasks.splice(taskIndex, 1);
     set({ board: { lists: newLists } });
-    deleteTaskInDB(task);
+    /* deleteTaskInDB(task); */
+    callDeleteTask(task);
   },
 }));
 

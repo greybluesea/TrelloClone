@@ -1,4 +1,4 @@
-import { databases, storage } from "../../appwrite";
+import { databases, storage } from "../../../appwrite";
 
 export async function deleteTaskInDB(task: Task) {
   await databases.deleteDocument(
