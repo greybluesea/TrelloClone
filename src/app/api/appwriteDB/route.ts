@@ -4,8 +4,8 @@ import { databases, storage } from "../../../../appwrite";
 
 export async function GET() {
   const data = await databases.listDocuments(
-    process.env.NEXT_PUBLIC_TRELLO_CLONE_DATABASE_ID!,
-    process.env.NEXT_PUBLIC_TASKS_COLLECTION_ID!
+    process.env.TRELLO_CLONE_DATABASE_ID!,
+    process.env.TASKS_COLLECTION_ID!
   );
 
   const tasks = data.documents;
@@ -22,8 +22,8 @@ export async function PUT(request: Request) {
 
   try {
     await databases.updateDocument(
-      process.env.NEXT_PUBLIC_TRELLO_CLONE_DATABASE_ID!,
-      process.env.NEXT_PUBLIC_TASKS_COLLECTION_ID!,
+      process.env.TRELLO_CLONE_DATABASE_ID!,
+      process.env.TASKS_COLLECTION_ID!,
       task.$id,
       task
       /* {
@@ -50,8 +50,8 @@ export async function DELETE(request: Request) {
 
   try {
     await databases.deleteDocument(
-      process.env.NEXT_PUBLIC_TRELLO_CLONE_DATABASE_ID!,
-      process.env.NEXT_PUBLIC_TASKS_COLLECTION_ID!,
+      process.env.TRELLO_CLONE_DATABASE_ID!,
+      process.env.TASKS_COLLECTION_ID!,
       task.$id
     );
     if (task.image) {
