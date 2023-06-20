@@ -1,6 +1,4 @@
-import {
-  UserCircleIcon
-} from "@heroicons/react/24/outline";
+import { UserCircleIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Search from "./Search";
 
@@ -15,7 +13,7 @@ function Nav() {
         height={40}
         className="w-34 md:w-44 pb-3 md:pb-0 object-contain "
       />
-      <div className="flex items-center space-x-3">
+      <div className="flex items-center space-x-3 px-3 md:px-0">
         <Search />
         <UserCircleIcon className="w-8 h-8 text-gray-400 " />
       </div>

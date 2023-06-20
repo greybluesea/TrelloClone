@@ -1,19 +1,24 @@
 import useModalStore from "@/store/modalStore";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
+import TaskStatusRadioGroup from "./TaskStatusRadioGroup";
 
 export default function Modal() {
-  const [isOpen, closeModal] = useModalStore((state) => [
-    state.isOpen,
-    state.closeModal,
-  ]);
+  const [isOpen, closeModal, newTaskTitle, setNewTaskTitle] = useModalStore(
+    (state) => [
+      state.isOpen,
+      state.closeModal,
+      state.newTaskTitle,
+      state.setNewTaskTitle,
+    ]
+  );
 
   return (
     // Use the `Transition` component at the root level
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog
         as="form"
-        className={"relative z-5 "}
+        className={"relative z-5  "}
         onClose={() => closeModal()}
       >
         {/*
@@ -48,15 +53,29 @@ export default function Modal() {
             >
               <Dialog.Panel
                 className={
-                  "w-full max-w-md transform overflow-hidden rounded-xl bg-slate-200 p-6 text-left align-middle shadow-lg transition-all "
+                  "w-full max-w-md transform overflow-hidden rounded-xl bg-gray-200 p-6 text-left align-middle shadow-lg transition-all "
                 }
               >
                 <Dialog.Title
                   as="h3"
-                  className={"text-lg font-medium leading-6 text-gray-800 pb-2"}
+                  className={
+                    "text-lg font-medium leading-6 text-gray-800 pb-2 text-center"
+                  }
                 >
                   Add a Task
                 </Dialog.Title>
+                <Dialog.Description>
+                  <div className="mt-2 space-y-2">
+                    <input
+                      type="text"
+                      placeholder="Enter a title here..."
+                      value={newTaskTitle}
+                      onChange={(e) => setNewTaskTitle(e.target.value)}
+                      className="w-full border borger-gray-300 rounded-md outline-none py-3 px-5"
+                    />
+                    <TaskStatusRadioGroup />
+                  </div>
+                </Dialog.Description>
               </Dialog.Panel>
             </Transition.Child>
           </div>

@@ -21,3 +21,9 @@ interface Image {
   bucketId: string;
   fileId: string;
 }
+
+interface NewTaskInput {
+  title: string;
+  status: Status;
+  image?: Image;
+}
