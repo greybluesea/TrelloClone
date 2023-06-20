@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .input-group:focus-within {
+    @apply ring-2 ring-sky-200 ring-opacity-60 ring-offset-2 ring-offset-sky-200;
+  }
+}

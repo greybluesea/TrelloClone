@@ -6,21 +6,24 @@ import React from "react";
 const statuses = [
   {
     status: "todo",
-    name: "Todo",
+    name: "To Do",
     description: "A new task planned to do",
     color: "bg-red-300",
+    textColor: "text-red-300",
   },
   {
     status: "doing",
     name: "Doing",
-    description: "A task currently worked on",
+    description: "A task currently working on",
     color: "bg-yellow-300",
+    textColor: "text-yellow-400",
   },
   {
     status: "done",
     name: "Done",
     description: "A task already completed",
     color: "bg-green-300",
+    textColor: "text-green-300",
   },
 ];
 
@@ -69,7 +72,12 @@ const TaskStatusRadioGroup = () => {
                   </div>
                 </div>
                 {checked && (
-                  <div className="shrink-0 text-white font-bold bg-sky-300 rounded-full p-1">
+                  <div
+                    className={
+                      "shrink-0 font-bold bg-gray-100 rounded-full p-1 " +
+                      status.textColor
+                    }
+                  >
                     <CheckIcon className="h-5 w-5" />
                   </div>
                 )}

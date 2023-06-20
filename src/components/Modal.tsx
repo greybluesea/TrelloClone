@@ -67,13 +67,17 @@ export default function Modal() {
                 </Dialog.Title>
                 <Dialog.Description>
                   <div className="my-4 space-y-4">
-                    <div className="flex flex-row px-5 bg-gray-100 align-middle border borger-gray-300 rounded-md">
+                    <div
+                      className={
+                        "flex flex-row px-5 bg-gray-100 align-middle border borger-gray-300 rounded-md input-group shadow-md "
+                      }
+                    >
                       <input
                         type="text"
                         placeholder="Enter a title here..."
                         value={newTaskTitle}
                         onChange={(e) => setNewTaskTitle(e.target.value)}
-                        className="w-full  outline-none py-3  bg-gray-100 "
+                        className="w-full  outline-none py-3 bg-gray-100 "
                       />
                       {newTaskTitle && (
                         <div className="shrink-0 grid content-center text-white bg-sky-300 rounded-full p-1 my-3">
