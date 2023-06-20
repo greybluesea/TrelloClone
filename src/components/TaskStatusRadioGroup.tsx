@@ -1,26 +1,27 @@
 import useModalStore from "@/store/modalStore";
 import { RadioGroup } from "@headlessui/react";
+import { CheckIcon } from "@heroicons/react/24/outline";
 import React from "react";
 
-type statuses = [
+const statuses = [
   {
-    status: "todo";
-    name: "Todo";
-    description: "A new task planned to do";
-    color: "bg-red-200";
+    status: "todo",
+    name: "Todo",
+    description: "A new task planned to do",
+    color: "bg-red-300",
   },
   {
-    status: "doing";
-    name: "Doing";
-    description: "A task current worked on";
-    color: "bg-yello-200";
+    status: "doing",
+    name: "Doing",
+    description: "A task currently worked on",
+    color: "bg-yellow-300",
   },
   {
-    status: "done";
-    name: "Done";
-    description: "A task already completed";
-    color: "bg-green-200";
-  }
+    status: "done",
+    name: "Done",
+    description: "A task already completed",
+    color: "bg-green-300",
+  },
 ];
 
 const TaskStatusRadioGroup = () => {
@@ -29,9 +30,55 @@ const TaskStatusRadioGroup = () => {
     state.setNewTaskStatus,
   ]);
   return (
-    <RadioGroup value={newTaskStatus} onChange={setNewTaskStatus}>
-      <RadioGroup.Label>Status</RadioGroup.Label>
-      <RadioGroup.Option value="todo">
+    <RadioGroup
+      value={newTaskStatus}
+      onChange={setNewTaskStatus}
+      className={"w-full space-y-2 pt-2"}
+    >
+      {statuses.map((status) => (
+        <RadioGroup.Option
+          value={status.status}
+          key={status.status}
+          className={({ active, checked }) =>
+            `${
+              active
+                ? "ring-2 ring-gray-100 ring-opacity-60 ring-offset-2 ring-offset-gray-100"
+                : ""
+            }
+                  ${checked ? status.color + "  text-gray-800" : "bg-gray-100"}
+                    relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-none`
+          }
+        >
+          {({ active, checked }) => (
+            <>
+              <div className="flex w-full items-center justify-between">
+                <div className="flex items-center">
+                  <div className="text-sm">
+                    <RadioGroup.Label
+                      as="p"
+                      className={"text-gray-800 font-medium"}
+                    >
+                      {status.name}
+                    </RadioGroup.Label>
+                    <RadioGroup.Description
+                      as="span"
+                      className={"text-gray-500"}
+                    >
+                      <span>{status.description}</span>
+                    </RadioGroup.Description>
+                  </div>
+                </div>
+                {checked && (
+                  <div className="shrink-0 text-white font-bold bg-sky-300 rounded-full p-1">
+                    <CheckIcon className="h-5 w-5" />
+                  </div>
+                )}
+              </div>
+            </>
+          )}
+        </RadioGroup.Option>
+      ))}
+      {/* <RadioGroup.Option value="todo">
         {({ checked }) => (
           <span className={checked ? "bg-red-200" : ""}>Todo</span>
         )}
@@ -45,7 +92,7 @@ const TaskStatusRadioGroup = () => {
         {({ checked }) => (
           <span className={checked ? "bg-green-200" : ""}>Done</span>
         )}
-      </RadioGroup.Option>
+      </RadioGroup.Option> */}
     </RadioGroup>
   );
 };

@@ -53,25 +53,25 @@ export default function Modal() {
             >
               <Dialog.Panel
                 className={
-                  "w-full max-w-md transform overflow-hidden rounded-xl bg-gray-200 p-6 text-left align-middle shadow-lg transition-all "
+                  "w-full max-w-md transform overflow-hidden rounded-xl bg-gray-200 p-8  text-left align-middle shadow-lg transition-all "
                 }
               >
                 <Dialog.Title
                   as="h3"
                   className={
-                    "text-lg font-medium leading-6 text-gray-800 pb-2 text-center"
+                    "text-lg font-medium leading-6 text-gray-800 pb-2 mt-3 text-center"
                   }
                 >
                   Add a Task
                 </Dialog.Title>
                 <Dialog.Description>
-                  <div className="mt-2 space-y-2">
+                  <div className="my-4 space-y-4">
                     <input
                       type="text"
                       placeholder="Enter a title here..."
                       value={newTaskTitle}
                       onChange={(e) => setNewTaskTitle(e.target.value)}
-                      className="w-full border borger-gray-300 rounded-md outline-none py-3 px-5"
+                      className="w-full border borger-gray-300 rounded-md outline-none py-3 px-5 bg-gray-100 "
                     />
                     <TaskStatusRadioGroup />
                   </div>
