@@ -128,7 +128,7 @@ export default function Modal() {
                     <div className="flex justify-end">
                       <button
                         className={
-                          "inline-flex   rounded-md border border-gray-300 bg-sky-400 px-4 py-2 text-md font-medium text-gray-800 hover:bg-sky-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 diabled:bg-gray-100 disabled:text-gray-300 disabled:cursor-not-allowed "
+                          "inline-flex   rounded-md border border-gray-300 bg-sky-400 px-4 py-2 text-md font-medium text-gray-200 hover:bg-sky-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2  disabled:text-gray-300 diabled:bg-gray-100 disabled:cursor-not-allowed disabled:grayscale-[50%] "
                         }
                         disabled={!newTaskTitle}
                       >
