@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer components {
-  .input-group:focus-within {
-    @apply ring-2 ring-sky-200 ring-opacity-60 ring-offset-2 ring-offset-sky-200;
+  .ring-group:focus-within {
+    @apply ring-2  ring-sky-300 ring-opacity-80 ring-offset-2 ring-offset-sky-200;
   }
 }

@@ -1,18 +1,23 @@
 import useModalStore from "@/store/modalStore";
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment } from "react";
+import { Fragment, useRef } from "react";
 import TaskStatusRadioGroup from "./TaskStatusRadioGroup";
 import { CheckIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
+import { PhotoIcon } from "@heroicons/react/24/solid";
 
 export default function Modal() {
-  const [isOpen, closeModal, newTaskTitle, setNewTaskTitle] = useModalStore(
-    (state) => [
+  const [isOpen, closeModal, newTaskTitle, setNewTaskTitle, image, setImage] =
+    useModalStore((state) => [
       state.isOpen,
       state.closeModal,
       state.newTaskTitle,
       state.setNewTaskTitle,
-    ]
-  );
+      state.image,
+      state.setImage,
+    ]);
+
+  const imagePickerRef = useRef<HTMLInputElement>(null);
 
   return (
     // Use the `Transition` component at the root level
@@ -66,10 +71,10 @@ export default function Modal() {
                   Add a Task
                 </Dialog.Title>
                 <Dialog.Description>
-                  <div className="my-4 space-y-4">
+                  <section id="wrapper" className="my-4 space-y-6">
                     <div
                       className={
-                        "flex flex-row px-5 bg-gray-100 align-middle border borger-gray-300 rounded-md input-group shadow-md "
+                        "flex flex-row px-5 bg-gray-100 align-middle border border-gray-300 rounded-md ring-group shadow-md "
                       }
                     >
                       <input
@@ -77,7 +82,7 @@ export default function Modal() {
                         placeholder="Enter a title here..."
                         value={newTaskTitle}
                         onChange={(e) => setNewTaskTitle(e.target.value)}
-                        className="w-full  outline-none py-3 bg-gray-100 "
+                        className="w-full outline-none py-3 bg-gray-100 "
                       />
                       {newTaskTitle && (
                         <div className="shrink-0 grid content-center text-white bg-sky-300 rounded-full p-1 my-3">
@@ -86,7 +91,51 @@ export default function Modal() {
                       )}
                     </div>
                     <TaskStatusRadioGroup />
-                  </div>
+                    <div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          imagePickerRef.current?.click();
+                        }}
+                        className="w-full bg-gray-100 text-gray-900 border border-gray-300 rounded-lg shadow-md outline-none p-5 ring-group"
+                      >
+                        <PhotoIcon className="h-6 w-6 mr-2  text-gray-800 inline-block" />
+                        Upload Image
+                      </button>
+                      {image && (
+                        <Image
+                          alt="uploaded image"
+                          width={200}
+                          height={160}
+                          className="w-full h-44 object-cover mt-2 filter hover:grayscale transition-all duration-150 cursor-not-allowed"
+                          src={URL.createObjectURL(image)}
+                          onClick={() => {
+                            setImage(null);
+                          }}
+                        />
+                      )}
+                      <input
+                        type="file"
+                        ref={imagePickerRef}
+                        hidden
+                        onChange={(e) => {
+                          const file = e.currentTarget.files![0];
+                          if (!file || !file.type.startsWith("image/")) return;
+                          setImage(file);
+                        }}
+                      />
+                    </div>
+                    <div className="flex justify-end">
+                      <button
+                        className={
+                          "inline-flex   rounded-md border border-gray-300 bg-sky-400 px-4 py-2 text-md font-medium text-gray-800 hover:bg-sky-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 diabled:bg-gray-100 disabled:text-gray-300 disabled:cursor-not-allowed "
+                        }
+                        disabled={!newTaskTitle}
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  </section>
                 </Dialog.Description>
               </Dialog.Panel>
             </Transition.Child>

@@ -36,18 +36,14 @@ const TaskStatusRadioGroup = () => {
     <RadioGroup
       value={newTaskStatus}
       onChange={setNewTaskStatus}
-      className={"w-full space-y-2 pt-2"}
+      className={"w-full space-y-2 "}
     >
       {statuses.map((status) => (
         <RadioGroup.Option
           value={status.status}
           key={status.status}
           className={({ active, checked }) =>
-            `${
-              active
-                ? "ring-2 ring-gray-100 ring-opacity-60 ring-offset-2 ring-offset-gray-100"
-                : ""
-            }
+            `${active ? " ring-group" : ""}
                   ${checked ? status.color + "  text-gray-800" : "bg-gray-100"}
                     relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-none`
           }
@@ -59,7 +55,7 @@ const TaskStatusRadioGroup = () => {
                   <div className="text-sm">
                     <RadioGroup.Label
                       as="p"
-                      className={"text-gray-800 font-medium"}
+                      className={"text-gray-900 font-medium"}
                     >
                       {status.name}
                     </RadioGroup.Label>
