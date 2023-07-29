@@ -34,7 +34,8 @@ export default function RootLayout({
         </main>
         <footer className=" flex flex-row justify-center">
           <ul className="hidden fixed bottom-20 lg:flex lg:flex-col mt-auto  mx-auto  justify-end items-center text-gray-200 space-y-1 bg-gray-600 px-7 py-5 rounded-xl w-160">
-            <li>NEXT.js Rest API + AppWriteDB + ChatGPT</li>
+            <li>NEXT.js Rest API + AppWriteDB </li>
+            <li>ChatGPT + Zustand</li>
             <li>Drag'n'Drop + HeadlessUI + Tailwind</li>
             <li>
               Learned from Sonny Sangha;{" "}

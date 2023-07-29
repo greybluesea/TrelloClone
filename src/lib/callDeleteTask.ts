@@ -1,13 +1,16 @@
 export async function callDeleteTask(task: Task) {
-  const res = await fetch("/api/appwriteDB", {
-    method: "DELETE",
+  const simplifiedTask = {
+    $id: task.$id,
+    title: task.title,
+    status: task.status,
+    ...(task.image && { image: task.image }),
+  };
+
+  const res = await fetch("/api/appwriteDB/delete", {
+    method: "POST",
     /* headers: {
       "Content-Type": "application/json",
     }, */
-    body: JSON.stringify(task),
+    body: JSON.stringify(simplifiedTask),
   });
-
-  /*  const data = await res.json();
-
-  console.log(data); */
 }

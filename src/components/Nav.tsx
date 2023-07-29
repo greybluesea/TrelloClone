@@ -7,7 +7,6 @@ function Nav() {
     <header className="flex flex-col md:flex-row items-center p-5 bg-gray-200/90 md:justify-between ">
       <Image
         src="/trello-logo-worldvectorlogo.svg"
-        /*  src="https://links.papareact.com/c2cdd5" */
         alt="Trello logo"
         width={120}
         height={40}
