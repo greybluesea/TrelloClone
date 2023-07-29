@@ -32,7 +32,7 @@ const List = ({ list }: Props) => {
           </span>
         </h2>
         <div className="pt-1">
-          <AddBtn />
+          <AddBtn status={list.status} />
         </div>
       </div>
       <Droppable droppableId={list.status} direction="vertical" type="card">
