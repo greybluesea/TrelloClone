@@ -3,6 +3,7 @@ import { callDeleteTask } from "@/lib/callDeleteTask";
 import { callGetBoard } from "@/lib/callGetBoard";
 import { callPutTask } from "@/lib/callPutTask";
 import uploadImage from "@/lib/uploadImage";
+import getURL from "@/lib/getURL";
 import { create } from "zustand";
 
 interface BoardState {
@@ -44,18 +45,23 @@ const useBoardStore = create<BoardState>()((set, get) => ({
   addTask: async (newTaskInput: NewTaskInput) => {
     if (newTaskInput.file) {
       const res = await uploadImage(newTaskInput.file);
-      console.log(res);
+
       let uploadedImage: Image;
       if (res) {
         uploadedImage = {
           bucketId: res.bucketId,
           fileId: res.$id,
         };
-        callAddTask({
+
+        const url = await getURL(uploadedImage);
+
+        const newTask: NewTask = {
           title: newTaskInput.title,
           status: newTaskInput.status,
-          image: uploadedImage,
-        });
+          image: url,
+        };
+
+        callAddTask(newTask);
       }
     } else {
       callAddTask({ title: newTaskInput.title, status: newTaskInput.status });

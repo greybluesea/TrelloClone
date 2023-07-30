@@ -26,11 +26,6 @@ export async function PUT(request: Request) {
       process.env.TASKS_COLLECTION_ID!,
       task.$id,
       task
-      /* {
-      title: task.title,
-      status: task.status,
-      ...(task.image && { image: task.image }),
-    } */
     );
     return NextResponse.json(
       { message: "task updated", task },

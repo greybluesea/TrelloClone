@@ -1,14 +1,12 @@
 import React from "react";
 
-const callAddTask = async (task: Partial<Task>) => {
-  console.log(task);
-
+const callAddTask = async (newTask: NewTask) => {
   const res = await fetch("/api/appwriteDB/add", {
     method: "POST",
-    headers: {
+    /* headers: {
       "Content-Type": "application/json",
-    },
-    body: JSON.stringify(task),
+    }, */
+    body: JSON.stringify(newTask),
   });
 
   // console.log(res);

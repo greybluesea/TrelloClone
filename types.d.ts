@@ -27,3 +27,9 @@ interface NewTaskInput {
   status: Status;
   file?: File;
 }
+
+interface NewTask {
+  title: string;
+  status: Status;
+  image?: URL;
+}
