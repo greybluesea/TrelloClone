@@ -25,5 +25,5 @@ interface Image {
 interface NewTaskInput {
   title: string;
   status: Status;
-  image?: Image;
+  file?: File;
 }

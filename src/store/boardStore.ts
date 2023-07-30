@@ -1,6 +1,8 @@
+import callAddTask from "@/lib/callAddTask";
 import { callDeleteTask } from "@/lib/callDeleteTask";
 import { callGetBoard } from "@/lib/callGetBoard";
 import { callPutTask } from "@/lib/callPutTask";
+import uploadImage from "@/lib/uploadImage";
 import { create } from "zustand";
 
 interface BoardState {
@@ -11,6 +13,7 @@ interface BoardState {
   searchText: string;
   setSearchText: (searchText: string) => void;
   deleteTask: (taskIndex: number, task: Task) => void;
+  addTask: (newTaskInput: NewTaskInput) => void;
 }
 
 const useBoardStore = create<BoardState>()((set, get) => ({
@@ -18,13 +21,11 @@ const useBoardStore = create<BoardState>()((set, get) => ({
     lists: new Map<Status, List>(),
   },
   getBoard: async () => {
-    /* const board = await fetchBoard(); */
     const board = await callGetBoard();
     set({ board });
   },
   setBoard: (board) => set({ board }),
   setTask: async (task) => {
-    /*  await updateTaskInDB(task); */
     await callPutTask(task);
   },
   searchText: "",
@@ -38,8 +39,27 @@ const useBoardStore = create<BoardState>()((set, get) => ({
       return console.error("No list found");
     newLists.get(task.status)!.tasks.splice(taskIndex, 1);
     set({ board: { lists: newLists } });
-    /* deleteTaskInDB(task); */
     callDeleteTask(task);
+  },
+  addTask: async (newTaskInput: NewTaskInput) => {
+    if (newTaskInput.file) {
+      const res = await uploadImage(newTaskInput.file);
+      console.log(res);
+      let uploadedImage: Image;
+      if (res) {
+        uploadedImage = {
+          bucketId: res.bucketId,
+          fileId: res.$id,
+        };
+        callAddTask({
+          title: newTaskInput.title,
+          status: newTaskInput.status,
+          image: uploadedImage,
+        });
+      }
+    } else {
+      callAddTask({ title: newTaskInput.title, status: newTaskInput.status });
+    }
   },
 }));
 

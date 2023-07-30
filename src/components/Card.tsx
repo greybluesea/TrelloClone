@@ -1,6 +1,8 @@
 import useBoardStore from "@/store/boardStore";
 import { XCircleIcon } from "@heroicons/react/24/solid";
-import React from "react";
+import getURL from "@/lib/getURL";
+import Image from "next/image";
+import React, { useEffect, useState } from "react";
 
 type Props = {
   task: Task;
@@ -10,6 +12,19 @@ type Props = {
 function Card({ taskIndex, task }: Props) {
   const searchText = useBoardStore((state) => state.searchText);
   const deleteTask = useBoardStore((state) => state.deleteTask);
+  const [imageURL, setImageURL] = useState("");
+
+  useEffect(() => {
+    if (task.image) {
+      const fetchImage = async () => {
+        const url = await getURL(task.image!);
+        if (url) {
+          setImageURL(url.toString());
+        }
+      };
+    }
+  }, []);
+
   if (
     searchText &&
     !task.title.toLowerCase().includes(searchText.toLocaleLowerCase())
@@ -22,6 +37,17 @@ function Card({ taskIndex, task }: Props) {
       <button onClick={() => deleteTask(taskIndex, task)}>
         <XCircleIcon className=" w-8 h-8 text-red-500/70 inline" />
       </button>
+      {imageURL && (
+        <div className="h-full w-full rounded-b-md">
+          <Image
+            src={imageURL}
+            alt="task image"
+            width={400}
+            height={200}
+            className="w-full object-contain rounded-b-md"
+          />
+        </div>
+      )}
     </div>
   );
 }

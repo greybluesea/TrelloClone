@@ -8,8 +8,8 @@ interface ModalState {
   setNewTaskTitle: (title: string) => void;
   newTaskStatus: Status;
   setNewTaskStatus: (status: Status) => void;
-  image: File | null;
-  setImage: (image: File | null) => void;
+  newTaskFile: File | null;
+  setNewTaskFile: (newTaskFile: File | null) => void;
 }
 const useModalStore = create<ModalState>()((set) => ({
   isOpen: false,
@@ -20,8 +20,8 @@ const useModalStore = create<ModalState>()((set) => ({
   setNewTaskTitle: (title) => set({ newTaskTitle: title }),
   newTaskStatus: "todo",
   setNewTaskStatus: (status) => set({ newTaskStatus: status }),
-  image: null,
-  setImage: (image) => set({ image }),
+  newTaskFile: null,
+  setNewTaskFile: (newTaskFile) => set({ newTaskFile }),
 }));
 
 export default useModalStore;

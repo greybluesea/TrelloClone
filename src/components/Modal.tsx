@@ -1,23 +1,53 @@
 import useModalStore from "@/store/modalStore";
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useRef } from "react";
+import { FormEvent, Fragment, useRef } from "react";
 import TaskStatusRadioGroup from "./TaskStatusRadioGroup";
 import { CheckIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { PhotoIcon } from "@heroicons/react/24/solid";
+import callAddTask from "@/lib/callAddTask";
+import useBoardStore from "@/store/boardStore";
 
 export default function Modal() {
-  const [isOpen, closeModal, newTaskTitle, setNewTaskTitle, image, setImage] =
-    useModalStore((state) => [
-      state.isOpen,
-      state.closeModal,
-      state.newTaskTitle,
-      state.setNewTaskTitle,
-      state.image,
-      state.setImage,
-    ]);
+  const [
+    isOpen,
+    closeModal,
+    newTaskTitle,
+    setNewTaskTitle,
+    newTaskFile,
+    setNewTaskFile,
+    newTaskStatus,
+  ] = useModalStore((state) => [
+    state.isOpen,
+    state.closeModal,
+    state.newTaskTitle,
+    state.setNewTaskTitle,
+    state.newTaskFile,
+    state.setNewTaskFile,
+    state.newTaskStatus,
+  ]);
+
+  const [addTask] = useBoardStore((state) => [state.addTask]);
 
   const imagePickerRef = useRef<HTMLInputElement>(null);
+
+  const newTaskInput: NewTaskInput = newTaskFile
+    ? {
+        title: newTaskTitle,
+        status: newTaskStatus,
+        file: newTaskFile,
+      }
+    : { title: newTaskTitle, status: newTaskStatus };
+
+  const handleAddTask = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!newTaskTitle) return;
+    //callAddTask(newTaskInput);
+
+    addTask(newTaskInput);
+    setNewTaskFile(null);
+    closeModal();
+  };
 
   return (
     // Use the `Transition` component at the root level
@@ -26,6 +56,7 @@ export default function Modal() {
         as="form"
         className={"relative z-5  "}
         onClose={() => closeModal()}
+        onSubmit={handleAddTask}
       >
         {/*
           Use one Transition.Child to apply one transition to the backdrop...
@@ -102,15 +133,15 @@ export default function Modal() {
                         <PhotoIcon className="h-6 w-6 mr-2  text-gray-800 inline-block" />
                         Upload Image
                       </button>
-                      {image && (
+                      {newTaskFile && (
                         <Image
                           alt="uploaded image"
                           width={200}
                           height={160}
                           className="w-full h-44 object-cover mt-2 filter hover:grayscale transition-all duration-150 cursor-not-allowed"
-                          src={URL.createObjectURL(image)}
+                          src={URL.createObjectURL(newTaskFile)}
                           onClick={() => {
-                            setImage(null);
+                            setNewTaskFile(null);
                           }}
                         />
                       )}
@@ -121,7 +152,7 @@ export default function Modal() {
                         onChange={(e) => {
                           const file = e.currentTarget.files![0];
                           if (!file || !file.type.startsWith("image/")) return;
-                          setImage(file);
+                          setNewTaskFile(file);
                         }}
                       />
                     </div>

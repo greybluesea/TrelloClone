@@ -38,7 +38,7 @@ export default function RootLayout({
             <li>ChatGPT + Zustand</li>
             <li>Drag'n'Drop + HeadlessUI + Tailwind</li>
             <li>
-              Learned from Sonny Sangha;{" "}
+              Learned from Sonny;{" "}
               <span className=" whitespace-nowrap ">
                 Powered by greybluesea
               </span>
