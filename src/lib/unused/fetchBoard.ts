@@ -20,7 +20,7 @@ const fetchBoard = async () => {
       $id: task.$id,
       status: task.status,
       $createdAt: task.$createdAt,
-      ...(task.image && { image: task.image }),
+      // ...(task.image && { image: task.image }),
     });
     return acc;
   }, new Map<Status, List>());

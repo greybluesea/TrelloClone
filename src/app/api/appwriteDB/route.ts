@@ -1,6 +1,5 @@
-import fetchBoard from "@/lib/unused/fetchBoard";
-import { NextRequest, NextResponse } from "next/server";
-import { databases, storage } from "../../../../appwrite";
+import { NextResponse } from "next/server";
+import { databases } from "../../../../appwrite";
 
 export async function GET() {
   const data = await databases.listDocuments(
