@@ -41,31 +41,57 @@ const useBoardStore = create<BoardState>()((set, get) => ({
     newLists.get(task.status)!.tasks.splice(taskIndex, 1);
     set({ board: { lists: newLists } });
     callDeleteTask(task);
+    console.log(task);
   },
   addTask: async (newTaskInput: NewTaskInput) => {
-    if (newTaskInput.file) {
-      const res = await uploadImage(newTaskInput.file);
+    const getNewTask = async () => {
+      let newTask: NewTask;
+      if (newTaskInput.file) {
+        const res = await uploadImage(newTaskInput.file);
+        let uploadedImage: Image;
+        if (res) {
+          uploadedImage = {
+            bucketId: res.bucketId,
+            fileId: res.$id,
+          };
 
-      let uploadedImage: Image;
-      if (res) {
-        uploadedImage = {
-          bucketId: res.bucketId,
-          fileId: res.$id,
-        };
+          const url = await getURL(uploadedImage);
 
-        const url = await getURL(uploadedImage);
-
-        const newTask: NewTask = {
+          return (newTask = {
+            title: newTaskInput.title,
+            status: newTaskInput.status,
+            image: url,
+          });
+        }
+      } else {
+        return (newTask = {
           title: newTaskInput.title,
           status: newTaskInput.status,
-          image: url,
-        };
-
-        callAddTask(newTask);
+        });
       }
-    } else {
-      callAddTask({ title: newTaskInput.title, status: newTaskInput.status });
+    };
+
+    const newTask = await getNewTask();
+
+    if (newTask) {
+      const uploadedTask = await callAddTask(newTask);
+
+      const newLists = new Map(get().board.lists);
+      if (
+        !newLists.get(newTask.status) ||
+        newLists.get(newTask.status)?.tasks.length === 0
+      )
+        return console.error("No newTask");
+      newLists.get(newTask.status)!.tasks.push(uploadedTask);
+      set({ board: { lists: newLists } });
     }
+
+    /* else {
+      const uploadedTask = await callAddTask({
+        title: newTaskInput.title,
+        status: newTaskInput.status,
+      });
+} */
   },
 }));
 

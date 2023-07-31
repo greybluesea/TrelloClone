@@ -9,7 +9,7 @@ const callAddTask = async (newTask: NewTask) => {
     body: JSON.stringify(newTask),
   });
 
-  // console.log(res);
+  return res.json();
 };
 
 export default callAddTask;

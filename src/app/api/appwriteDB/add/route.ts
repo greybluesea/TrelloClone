@@ -21,11 +21,12 @@ export async function POST(request: Request) {
       } */
     );
 
-    // console.log(uploadedTask);
-    return NextResponse.json(
+    console.log(uploadedTask);
+    /*  return NextResponse.json(
       { message: "task updated", uploadedTask },
       { status: 200 }
-    );
+    ); */
+    return new Response(JSON.stringify(uploadedTask));
   } catch (err) {
     return NextResponse.json({ message: "ERROR" }, { status: 500 });
   }
