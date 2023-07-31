@@ -18,7 +18,7 @@ export async function POST(request: Request) {
       },
       {
         role: "user",
-        content: `Hi there, would you please provide a summary of the following tasks, including how many tasks are in each list, then wish the user to have a productive day? Here's the data: ${JSON.stringify(
+        content: `Hi there, would you please provide a summary of the following tasks, including how many tasks are in each list, and also the task names, then wish the user to have a productive day? Here's the data: ${JSON.stringify(
           taskTitlesObject
         )}`,
       },
