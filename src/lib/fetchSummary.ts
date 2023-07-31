@@ -16,18 +16,27 @@ const formatTasksForAI = (board: Board) => {
     {} as { [key in Status]: number }
   );
 
-  return countsObject;
+  const taskTitlesObject = Object.entries(tasksObject).reduce(
+    (object, [status, tasks]) => {
+      object[status as Status] = tasks.map((task) => task.title);
+      return object;
+    },
+    {} as { [key in Status]: string[] }
+  );
+
+  return taskTitlesObject;
 };
 
 const fetchSummary = async (board: Board) => {
-  const countsObject = formatTasksForAI(board);
+  const taskTitlesObject = formatTasksForAI(board);
+  console.log(taskTitlesObject);
 
   const res = await fetch("/api/generateSummary", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(countsObject),
+    body: JSON.stringify(taskTitlesObject),
   });
 
   console.log(res);

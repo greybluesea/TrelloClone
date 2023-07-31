@@ -7,7 +7,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Trello Clone",
-  description: "Next.js GPT-4",
+  description:
+    "NEXT.js Rest API + AppWriteDB + ChatGPT + Zustand + Drag'n'Drop + HeadlessUI + Tailwind",
 };
 
 export default function RootLayout({
@@ -25,14 +26,14 @@ export default function RootLayout({
       >
         <div
           id="backdrop"
-          className="fixed top-0 left-0 w-full h-full bg-[url('/backgroundImg4.jpg')] blur-xs opacity-90 -z-50 bg-cover bg-center bg-fixed filter"
+          className="fixed top-0 left-0 w-full h-full bg-[url('/backgroundImg4.jpg')] blur-xs opacity-80 -z-50 bg-cover bg-center bg-fixed filter"
         ></div>
         <main>
           <Nav />
 
           <>{children}</>
         </main>
-        <footer className=" flex flex-row justify-center">
+        <footer className=" flex flex-row justify-center -z-10">
           <ul className="hidden fixed bottom-20 lg:flex lg:flex-col mt-auto  mx-auto  justify-end items-center text-gray-200 space-y-1 bg-gray-600 px-7 py-5 rounded-xl w-160">
             <li>NEXT.js Rest API + AppWriteDB </li>
             <li>ChatGPT + Zustand</li>
