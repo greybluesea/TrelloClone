@@ -20,12 +20,12 @@ export default function RootLayout({
       <body
         className={
           inter.className +
-          " bg-gray-200 min-h-screen flex flex-col justify-between"
+          " bg-gray-200 min-h-screen flex flex-col justify-between "
         }
       >
         <div
           id="backdrop"
-          className="absolute top-0 left-0 w-full h-full bg-[url('/backgroundImg4.jpg')] blur-xs opacity-90 -z-50 bg-cover bg-center filter"
+          className="fixed top-0 left-0 w-full h-full bg-[url('/backgroundImg4.jpg')] blur-xs opacity-90 -z-50 bg-cover bg-center bg-fixed filter"
         ></div>
         <main>
           <Nav />

@@ -41,7 +41,8 @@ function Bot({}: Props) {
           {/*  {summary && !isLoading
             ? summary
             : "GPT is summarizing your tasks for the day..."} */}
-          GPT is currently not in use, because of cost.
+          {/*  GPT is currently not in use, because of cost. */}
+          Click to fetch a summary from ChatGPT
         </p>
       </div>
     </div>

@@ -6,7 +6,7 @@ export default function Home() {
     <>
       <Bot />
 
-      <main>
+      <main className="mb-20">
         <Board />
       </main>
     </>

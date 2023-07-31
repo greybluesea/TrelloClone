@@ -31,13 +31,18 @@ export default function Modal() {
 
   const imagePickerRef = useRef<HTMLInputElement>(null);
 
-  const newTaskInput: NewTaskInput = newTaskFile
+  /*   const newTaskInput: NewTaskInput = newTaskFile
     ? {
         title: newTaskTitle,
         status: newTaskStatus,
         file: newTaskFile,
       }
-    : { title: newTaskTitle, status: newTaskStatus };
+    : { title: newTaskTitle, status: newTaskStatus }; */
+  const newTaskInput: NewTaskInput = {
+    title: newTaskTitle,
+    status: newTaskStatus,
+    ...(newTaskFile && { file: newTaskFile }),
+  };
 
   const handleAddTask = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -46,6 +51,7 @@ export default function Modal() {
 
     addTask(newTaskInput);
     setNewTaskFile(null);
+    setNewTaskTitle("");
     closeModal();
   };
 
