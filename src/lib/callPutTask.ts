@@ -3,7 +3,6 @@ export async function callPutTask(task: Task) {
     $id: task.$id,
     title: task.title,
     status: task.status,
-    ...(task.image && { image: task.image }),
   };
 
   const res = await fetch("/api/appwriteDB", {
