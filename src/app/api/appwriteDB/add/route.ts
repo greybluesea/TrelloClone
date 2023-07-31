@@ -14,14 +14,9 @@ export async function POST(request: Request) {
       process.env.TASKS_COLLECTION_ID!,
       ID.unique(),
       newTask
-      /* {
-        title,
-        status,
-        ...(file && { image: url.toString() }),
-      } */
     );
 
-    console.log(uploadedTask);
+    //  console.log(uploadedTask);
     /*  return NextResponse.json(
       { message: "task updated", uploadedTask },
       { status: 200 }

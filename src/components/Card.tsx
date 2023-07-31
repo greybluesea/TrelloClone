@@ -12,7 +12,7 @@ type Props = {
 function Card({ taskIndex, task }: Props) {
   const searchText = useBoardStore((state) => state.searchText);
   const deleteTask = useBoardStore((state) => state.deleteTask);
-  const [imageURL, setImageURL] = useState("");
+  //const [imageURL, setImageURL] = useState("");
 
   /* useEffect(() => {
     if (task.image) {
@@ -40,11 +40,11 @@ function Card({ taskIndex, task }: Props) {
         </button>
       </div>
       <div>
-        {task.image && (
+        {task.imageURL && (
           <div className="h-full w-full rounded-b-md mt-2 -mb-1">
             <Image
               //src={imageURL}
-              src={task.image.toString()}
+              src={task.imageURL.toString()}
               alt="task image"
               width={300}
               height={200}

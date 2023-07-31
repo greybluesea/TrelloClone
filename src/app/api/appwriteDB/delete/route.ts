@@ -8,14 +8,16 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: "$id is required" });
 
   try {
+    if (task.imageBucketId && task.imageFileId) {
+      await storage.deleteFile(task.imageBucketId, task.imageFileId);
+    }
+
     await databases.deleteDocument(
       process.env.TRELLO_CLONE_DATABASE_ID!,
       process.env.TASKS_COLLECTION_ID!,
       task.$id
     );
-    if (task.image) {
-      await storage.deleteFile(task.image.bucketId, task.image.fileId);
-    }
+
     return NextResponse.json(
       { message: "task deleted", task },
       { status: 200 }

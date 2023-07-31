@@ -15,7 +15,9 @@ export async function callGetBoard() {
       $id: task.$id,
       status: task.status,
       $createdAt: task.$createdAt,
-      ...(task.image && { image: task.image }),
+      ...(task.imageURL && { imageURL: task.imageURL }),
+      ...(task.imageBucketId && { imageBucketId: task.imageBucketId }),
+      ...(task.imageFileId && { imageFileId: task.imageFileId }),
     });
     return acc;
   }, new Map<Status, List>());

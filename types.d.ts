@@ -14,12 +14,14 @@ interface Task extends Models.Document {
   $createdAt: string;
   title: string;
   status: Status;
-  image?: Image;
+  imageURL?: string;
+  imageBucketId?: string;
+  imageFileId?: string;
 }
 
 interface Image {
-  bucketId: string;
-  fileId: string;
+  imageBucketId: string;
+  imageFileId: string;
 }
 
 interface NewTaskInput {
@@ -31,5 +33,7 @@ interface NewTaskInput {
 interface NewTask {
   title: string;
   status: Status;
-  image?: URL;
+  imageURL?: string;
+  imageBucketId?: string;
+  imageFileId?: string;
 }

@@ -41,7 +41,6 @@ const useBoardStore = create<BoardState>()((set, get) => ({
     newLists.get(task.status)!.tasks.splice(taskIndex, 1);
     set({ board: { lists: newLists } });
     callDeleteTask(task);
-    console.log(task);
   },
   addTask: async (newTaskInput: NewTaskInput) => {
     const getNewTask = async () => {
@@ -51,17 +50,21 @@ const useBoardStore = create<BoardState>()((set, get) => ({
         let uploadedImage: Image;
         if (res) {
           uploadedImage = {
-            bucketId: res.bucketId,
-            fileId: res.$id,
+            imageBucketId: res.bucketId,
+            imageFileId: res.$id,
           };
+          // console.log(res);
 
           const url = await getURL(uploadedImage);
-
-          return (newTask = {
+          newTask = {
             title: newTaskInput.title,
             status: newTaskInput.status,
-            image: url,
-          });
+            imageURL: url.toString(),
+            imageBucketId: res.bucketId,
+            imageFileId: res.$id,
+          };
+          // console.log(newTask);
+          return newTask;
         }
       } else {
         return (newTask = {
@@ -76,22 +79,19 @@ const useBoardStore = create<BoardState>()((set, get) => ({
     if (newTask) {
       const uploadedTask = await callAddTask(newTask);
 
+      // console.log(uploadedTask);
+
       const newLists = new Map(get().board.lists);
-      if (
-        !newLists.get(newTask.status) ||
-        newLists.get(newTask.status)?.tasks.length === 0
-      )
-        return console.error("No newTask");
-      newLists.get(newTask.status)!.tasks.push(uploadedTask);
+
+      !newLists.get(newTask.status)
+        ? //  || newLists.get(newTask.status)?.tasks.length === 0
+          newLists.set(newTask.status, {
+            status: newTask.status,
+            tasks: [uploadedTask],
+          })
+        : newLists.get(newTask.status)!.tasks.push(uploadedTask);
       set({ board: { lists: newLists } });
     }
-
-    /* else {
-      const uploadedTask = await callAddTask({
-        title: newTaskInput.title,
-        status: newTaskInput.status,
-      });
-} */
   },
 }));
 
