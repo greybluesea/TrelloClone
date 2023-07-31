@@ -46,13 +46,14 @@ function Bot({}: Props) {
             "w-10 h-10 inline mx-2 float-left cursor-pointer " +
             (isLoading && "animate-spin")
           }
-          onClick={() => BotFetchingSummary()}
+          onClick={() => setIsLoading(!isLoading)}
+          //  onClick={() => BotFetchingSummary()}
         />
         <p className="text-sm  min-w-min ">
-          {summary && !isLoading
+          {/*  {summary && !isLoading
             ? summary
-            : "GPT is summarizing your tasks for the day..."}
-          {/*  GPT is currently not in use, because of cost. */}
+            : "GPT is summarizing your tasks for the day..."} */}
+          GPT is currently not in use, because of cost.
           {/* Click to fetch a summary from ChatGPT */}
         </p>
       </div>
