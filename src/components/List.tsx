@@ -41,8 +41,7 @@ const List = ({ list }: Props) => {
             {...provided.droppableProps}
             ref={provided.innerRef}
             className={
-              "p-3 rounded-md flex flex-col-reverse " +
-              (snapshot.isDraggingOver && "bg-green-100/90")
+              "p-3 rounded-md " + (snapshot.isDraggingOver && "bg-green-100/90")
             }
           >
             {list.tasks.map((task, index) => (
