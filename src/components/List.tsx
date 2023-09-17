@@ -15,14 +15,14 @@ const statusToTitleObject: { [key in Status]: string } = {
 
 const List = ({ list }: Props) => {
   const searchText = useBoardStore((state) => state.searchText);
-  /*  list.tasks.sort((taskA, taskB) => {
-    const dateA = new Date(taskA.$createdAt);
-    const dateB = new Date(taskB.$createdAt);
+
+  list.tasks.sort((taskA, taskB) => {
+    const dateA = new Date(taskA.$createdAt).getTime();
+    const dateB = new Date(taskB.$createdAt).getTime();
 
     // Compare in descending order
     return dateB - dateA;
   });
-  console.log(list.tasks); */
 
   return (
     <div className=" bg-gray-200/90 rounded-lg p-4  ">
