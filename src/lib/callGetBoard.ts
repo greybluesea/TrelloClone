@@ -10,7 +10,7 @@ export async function callGetBoard() {
         tasks: [],
       });
     }
-    acc.get(task.status)!.tasks.push({
+    acc.get(task.status)!.tasks.unshift({
       title: task.title,
       $id: task.$id,
       status: task.status,
