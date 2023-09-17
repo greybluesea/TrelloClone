@@ -15,7 +15,13 @@ const statusToTitleObject: { [key in Status]: string } = {
 
 const List = ({ list }: Props) => {
   const searchText = useBoardStore((state) => state.searchText);
-  list.tasks.sort((a, b) => +b.$id - +a.$id);
+  list.tasks.sort((taskA, taskB) => {
+    const dateA = new Date(taskA.$createdAt);
+    const dateB = new Date(taskB.$createdAt);
+
+    // Compare in descending order
+    return dateB - dateA;
+  });
   console.log(list.tasks);
 
   return (
