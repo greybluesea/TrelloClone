@@ -15,7 +15,8 @@ const statusToTitleObject: { [key in Status]: string } = {
 
 const List = ({ list }: Props) => {
   const searchText = useBoardStore((state) => state.searchText);
-  list.tasks.sort((a, b) => +b.$id - +a.$id);
+  const sortedTasks = list.tasks.toSorted((a, b) => +b.$id - +a.$id);
+  console.log(sortedTasks);
 
   return (
     <div className=" bg-gray-200/90 rounded-lg p-4  ">
@@ -46,7 +47,7 @@ const List = ({ list }: Props) => {
               "p-3 rounded-md " + (snapshot.isDraggingOver && "bg-green-100/90")
             }
           >
-            {list.tasks.map((task, index) => (
+            {sortedTasks.map((task, index) => (
               <Draggable key={task.title} index={index} draggableId={task.$id}>
                 {(provided) => (
                   <div
